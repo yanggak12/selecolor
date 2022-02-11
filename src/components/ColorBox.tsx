@@ -1,21 +1,26 @@
 interface Props {
   color: string;
   isTarget: boolean;
+  onClickHandler: () => void;
 }
 
-const ColorBox: React.FC<Props> = ({ color, isTarget }) => {
+const ColorBox: React.FC<Props> = ({ color, isTarget, onClickHandler }) => {
   return (
-    <div className="container">
-      {isTarget && <div>target</div>}
+    <>
+      <div>
+        <button className="btn" onClick={onClickHandler}></button>
+      </div>
       <style jsx>{`
-        .container {
+        .btn {
           width: 100px;
           height: 100px;
-          background-color: ${color};
-          border: 1px solid #000;
+          margin: 10px;
+          background-color: ${isTarget ? color : "#900"};
+          align-items: center;
+          border-radius: 24px;
         }
       `}</style>
-    </div>
+    </>
   );
 };
 
