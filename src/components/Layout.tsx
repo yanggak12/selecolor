@@ -6,6 +6,10 @@ const Layout: React.FC = ({ children }) => {
       </div>
       <style jsx global>{`
         body {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
           background-color: aquamarine;
         }
       `}</style>

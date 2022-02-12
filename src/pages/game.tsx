@@ -1,38 +1,34 @@
 import type { NextPage } from "next";
-import Seo from "../components/Seo";
-import { useState } from "react";
-import ColorBox from "../components/ColorBox";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import getBoxCnt from "../container/getBoxCnt";
 import getBoxRange from "../container/getBoxRange";
-import getTargetIndex from "../container/getTargetIndex";
 import getGridCnt from "../container/getGridCnt";
+import getTargetIndex from "../container/getTargetIndex";
+import Seo from "../components/Seo";
+import BoxContainer from "../components/BoxContainer";
 
 const Game: NextPage = () => {
+  const router = useRouter();
+  useEffect(() => {
+    if (!router.query.prev) router.replace("/");
+  }, [router]);
   const [stage, setStage] = useState(1);
   const boxCnt = getBoxCnt(stage);
-  const gridCnt = getGridCnt(boxCnt);
   const boxRange = getBoxRange(boxCnt);
+  const gridCnt = getGridCnt(boxCnt);
   const targetIndex = getTargetIndex(boxCnt);
   return (
     <>
       <Seo title="Game" />
       <h1>Game</h1>
-      <div className="boxContainer">
-        {boxRange.map((val, idx) => (
-          <ColorBox
-            key={idx}
-            color="#fff"
-            isTarget={val === targetIndex}
-            onClickHandler={() => setStage(stage + 1)}
-          />
-        ))}
-      </div>
-      <style jsx>{`
-        .boxContainer {
-          display: grid;
-          grid-template-columns: repeat(${gridCnt}, 110px);
-        }
-      `}</style>
+      <BoxContainer
+        stage={stage}
+        setStage={setStage}
+        boxRange={boxRange}
+        gridCnt={gridCnt}
+        targetIndex={targetIndex}
+      />
     </>
   );
 };
