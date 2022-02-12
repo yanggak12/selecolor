@@ -10,7 +10,7 @@ const Layout: React.FC = ({ children }) => {
           justify-content: center;
           align-items: center;
           text-align: center;
-          background-color: aquamarine;
+          background-color: #fff;
         }
       `}</style>
     </>

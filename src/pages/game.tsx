@@ -7,6 +7,7 @@ import getGridCnt from "../container/getGridCnt";
 import getTargetIndex from "../container/getTargetIndex";
 import Seo from "../components/Seo";
 import BoxContainer from "../components/BoxContainer";
+import getRandomColor from "../container/getRandomColor";
 
 const Game: NextPage = () => {
   const router = useRouter();
@@ -18,16 +19,19 @@ const Game: NextPage = () => {
   const boxRange = getBoxRange(boxCnt);
   const gridCnt = getGridCnt(boxCnt);
   const targetIndex = getTargetIndex(boxCnt);
+  const boxColor = getRandomColor();
+
   return (
     <>
       <Seo title="Game" />
-      <h1>Game</h1>
+      <h1>Stage {stage}</h1>
       <BoxContainer
         stage={stage}
         setStage={setStage}
         boxRange={boxRange}
         gridCnt={gridCnt}
         targetIndex={targetIndex}
+        color={boxColor}
       />
     </>
   );
