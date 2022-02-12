@@ -1,19 +1,36 @@
+import getColorPercent from "../container/getColorPercent";
+
 interface Props {
   isTarget: boolean;
   stage: number;
   setStage: (arg: number) => void;
   color: string;
+  time: number;
+  setScore: (arg: number) => void;
+  setTime: (arg: number) => void;
 }
 
-const BoxItem: React.FC<Props> = ({ isTarget, stage, setStage, color }) => {
-  const colorPercent = 0.3 * (stage / 2) > 0.85 ? 0.85 : 0.3 * (stage / 2);
-  console.log(colorPercent);
+const BoxItem: React.FC<Props> = ({
+  isTarget,
+  stage,
+  setStage,
+  color,
+  time,
+  setScore,
+  setTime,
+}) => {
+  const colorPercent = getColorPercent(stage);
   return (
     <>
       <button
         className={isTarget ? "target" : ""}
         onClick={() => {
-          isTarget ? setStage(stage + 1) : alert("no");
+          if (isTarget) {
+            setScore(Math.pow(stage, 3) * time);
+            setStage(stage + 1);
+          } else {
+            time <= 3 ? setTime(0) : setTime(time - 3);
+          }
         }}
       ></button>
       <style jsx>{`

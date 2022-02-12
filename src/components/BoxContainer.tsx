@@ -8,6 +8,9 @@ interface Props {
   gridCnt: number;
   targetIndex: number;
   color: string;
+  time: number;
+  setScore: (arg: number) => void;
+  setTime: (arg: number) => void;
 }
 const BoxContainer: React.FC<Props> = ({
   stage,
@@ -16,6 +19,9 @@ const BoxContainer: React.FC<Props> = ({
   targetIndex,
   setStage,
   color,
+  time,
+  setScore,
+  setTime,
 }) => {
   return (
     <>
@@ -25,6 +31,9 @@ const BoxContainer: React.FC<Props> = ({
             key={idx}
             isTarget={val === targetIndex}
             stage={stage}
+            time={time}
+            setTime={setTime}
+            setScore={setScore}
             setStage={setStage}
             color={color}
           />
