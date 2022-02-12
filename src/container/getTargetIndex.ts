@@ -1,5 +1,5 @@
 const getTargetIndex = (boxCnt: number) => {
-  return Math.round(Math.random() * boxCnt);
+  return Math.floor(Math.random() * boxCnt);
 };
 
 export default getTargetIndex;
