@@ -42,7 +42,13 @@ const Game: NextPage = () => {
       <Seo title="Game" />
       {readyTime ? (
         <div className="center-div">
+          <h1>Select a differnt color box!</h1>
           <h1>{readyTime}</h1>
+          <h3>If you select quickly, your score will be go up more.</h3>
+          <h3>
+            But if you select the wrong box, the time will be reduced by 3
+            seconds.
+          </h3>
         </div>
       ) : (
         <>
@@ -62,7 +68,7 @@ const Game: NextPage = () => {
             isVisible={isVisible}
             setVisible={setVisible}
             time={time}
-            title={"Alert"}
+            title={"Time Out!"}
             score={score}
             newGameHandler={() => {
               setScore(0);
