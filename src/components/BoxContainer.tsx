@@ -51,6 +51,12 @@ const BoxContainer: React.FC<Props> = ({
           row-gap: 5px;
           column-gap: 5px;
         }
+        @media (max-width: 700px) {
+          .boxContainer {
+            width: 300px;
+            height: 300px;
+          }
+        }
       `}</style>
     </>
   );
