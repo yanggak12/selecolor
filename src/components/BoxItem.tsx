@@ -39,9 +39,11 @@ const BoxItem: React.FC<Props> = ({
           height: 100%;
           border-radius: 10%;
           background-color: ${color + 1 + ")"};
+          border: 0;
+          cursor: pointer;
         }
         button:hover {
-          transform: translateY(-0.05em);
+          transform: translateY(-0.1em);
         }
         .target {
           background-color: ${color + colorPercent + ")"};
