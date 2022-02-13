@@ -24,7 +24,7 @@ const AlertModal: React.FC<Props> = ({
           <h1>{title}</h1>
         </header>
         <section>
-          <h3>Score : {score}</h3>
+          <h3>Score : {score.toLocaleString()}</h3>
           <div className="buttonContainer">
             <button onClick={newGameHandler}>
               <Image src={"/retry.svg"} width={20} height={20} alt="retry" />
