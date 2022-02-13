@@ -37,13 +37,6 @@ const BoxContainer: React.FC<Props> = ({
             setStage={setStage}
             color={color}
           />
-          // <button
-          //   key={idx}
-          //   className={targetIndex === val ? "target" : ""}
-          //   onClick={() =>
-          //     targetIndex === val ? setStage(stage + 1) : alert("no")
-          //   }
-          // ></button>
         ))}
       </div>
       <style jsx>{`
