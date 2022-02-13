@@ -12,6 +12,12 @@ const Layout: React.FC = ({ children }) => {
           text-align: center;
           background-color: #fff;
         }
+        .center-div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
       `}</style>
     </>
   );

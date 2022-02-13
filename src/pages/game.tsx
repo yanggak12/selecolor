@@ -10,9 +10,11 @@ import Seo from "../components/Seo";
 import BoxContainer from "../components/BoxContainer";
 import getRandomColor from "../container/getRandomColor";
 import StageTime from "../components/StageTime";
+import AlertModal from "../components/AlertModal";
 
 const Game: NextPage = () => {
   const [stage, setStage] = useState(1);
+  const [readyTime, setReadyTime] = useState(3);
   const [time, setTime] = useState(15);
   const [boxColor, setBoxColor] = useState("");
   const [targetIndex, setTargetIndex] = useState(getTargetIndex(4));
@@ -31,24 +33,46 @@ const Game: NextPage = () => {
     setTargetIndex(getTargetIndex(boxCnt));
   }, [stage, boxCnt]);
   useInterval(() => {
-    time && setTime(time - 1);
+    if (readyTime) setReadyTime(readyTime - 1);
+    else if (time) setTime(time - 1);
   }, 1000);
 
   return (
     <>
       <Seo title="Game" />
-      <StageTime stage={stage} time={time} score={score} />
-      <BoxContainer
-        time={time}
-        setTime={setTime}
-        stage={stage}
-        setStage={setStage}
-        boxRange={boxRange}
-        gridCnt={gridCnt}
-        targetIndex={targetIndex}
-        color={boxColor}
-        setScore={setScore}
-      />
+      {readyTime ? (
+        <div className="center-div">
+          <h1>{readyTime}</h1>
+        </div>
+      ) : (
+        <>
+          <StageTime stage={stage} time={time} score={score} />
+          <BoxContainer
+            time={time}
+            setTime={setTime}
+            stage={stage}
+            setStage={setStage}
+            boxRange={boxRange}
+            gridCnt={gridCnt}
+            targetIndex={targetIndex}
+            color={boxColor}
+            setScore={setScore}
+          />
+          <AlertModal
+            isVisible={isVisible}
+            setVisible={setVisible}
+            time={time}
+            title={"Alert"}
+            score={score}
+            newGameHandler={() => {
+              setScore(0);
+              setTime(15);
+              setStage(1);
+              setReadyTime(3);
+            }}
+          />
+        </>
+      )}
     </>
   );
 };
