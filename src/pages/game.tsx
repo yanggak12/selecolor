@@ -11,6 +11,7 @@ import BoxContainer from "../components/BoxContainer";
 import getRandomColor from "../container/getRandomColor";
 import StageTime from "../components/StageTime";
 import AlertModal from "../components/AlertModal";
+import RankModal from "../components/RankModal";
 
 const Game: NextPage = () => {
   const [stage, setStage] = useState(1);
@@ -19,7 +20,8 @@ const Game: NextPage = () => {
   const [boxColor, setBoxColor] = useState("");
   const [targetIndex, setTargetIndex] = useState(getTargetIndex(4));
   const [score, setScore] = useState(0);
-  const [isVisible, setVisible] = useState(false);
+  const [AlertVisible, setAlertVisible] = useState(false);
+  const [RankVisible, setRankVisible] = useState(false);
   const boxCnt = getBoxCnt(stage);
   const boxRange = getBoxRange(boxCnt);
   const gridCnt = getGridCnt(boxCnt);
@@ -66,8 +68,9 @@ const Game: NextPage = () => {
             setScore={setScore}
           />
           <AlertModal
-            isVisible={isVisible}
-            setVisible={setVisible}
+            rankHandler={() => setRankVisible(true)}
+            isVisible={AlertVisible}
+            setVisible={setAlertVisible}
             time={time}
             title={"Time Out!"}
             score={score}
@@ -77,6 +80,11 @@ const Game: NextPage = () => {
               setStage(1);
               setReadyTime(3);
             }}
+          />
+          <RankModal
+            isVisible={RankVisible}
+            score={score}
+            setVisible={setRankVisible}
           />
         </>
       )}

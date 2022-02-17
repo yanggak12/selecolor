@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
 import ImgButton from "./ImgButton";
 import Modal from "./Modal";
@@ -9,6 +10,7 @@ interface Props {
   time: number;
   setVisible: (arg: boolean) => void;
   newGameHandler: () => void;
+  rankHandler: () => void;
 }
 
 const AlertModal: React.FC<Props> = ({
@@ -16,6 +18,7 @@ const AlertModal: React.FC<Props> = ({
   score,
   newGameHandler,
   time,
+  rankHandler,
 }) => {
   const router = useRouter();
   return (
@@ -27,6 +30,11 @@ const AlertModal: React.FC<Props> = ({
         <section>
           <h3>Score : {score.toLocaleString()}</h3>
           <div className="buttonContainer">
+            <ImgButton
+              img="/medal.svg"
+              text="Rank"
+              onClickHandler={rankHandler}
+            />
             <ImgButton
               img="/retry.svg"
               text="Retry"

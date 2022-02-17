@@ -24,6 +24,11 @@ const Home: NextPage = () => {
             <h1>START</h1>
           </a>
         </Link>
+        <Link href="/rank">
+          <a className="start">
+            <h1>RANK</h1>
+          </a>
+        </Link>
       </section>
       <style jsx>{`
         .title {
@@ -39,11 +44,11 @@ const Home: NextPage = () => {
           justify-content: center;
           align-items: center;
         }
-        .start {
+        a {
           text-decoration: none;
           color: #000;
         }
-        .start > h1 {
+        a > h1 {
           border: 3px solid #000;
           border-radius: 12px;
           font-size: 24px;
