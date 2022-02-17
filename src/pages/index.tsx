@@ -9,7 +9,7 @@ import getRandomColor from "../container/getRandomColor";
 const Home: NextPage = () => {
   const [titleColor, setTitleColor] = useState("#000");
   useInterval(() => {
-    setTitleColor(getRandomColor() + "0.8)");
+    setTitleColor("rgba(" + getRandomColor() + ",0.8)");
   }, 2000);
   return (
     <div>
