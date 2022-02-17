@@ -6,6 +6,7 @@ interface Props {
   setStage: (arg: number) => void;
   color: string;
   time: number;
+  score: number;
   setScore: (arg: number) => void;
   setTime: (arg: number) => void;
 }
@@ -16,6 +17,7 @@ const BoxItem: React.FC<Props> = ({
   setStage,
   color,
   time,
+  score,
   setScore,
   setTime,
 }) => {
@@ -26,7 +28,7 @@ const BoxItem: React.FC<Props> = ({
         className={isTarget ? "target" : ""}
         onClick={() => {
           if (isTarget) {
-            setScore(Math.pow(stage, 3) * time);
+            setScore(score + Math.pow(stage, 3) * time);
             setStage(stage + 1);
           } else {
             time <= 3 ? setTime(0) : setTime(time - 3);

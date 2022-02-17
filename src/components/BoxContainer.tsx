@@ -9,6 +9,7 @@ interface Props {
   targetIndex: number;
   color: string;
   time: number;
+  score: number;
   setScore: (arg: number) => void;
   setTime: (arg: number) => void;
 }
@@ -20,6 +21,7 @@ const BoxContainer: React.FC<Props> = ({
   setStage,
   color,
   time,
+  score,
   setScore,
   setTime,
 }) => {
@@ -31,6 +33,7 @@ const BoxContainer: React.FC<Props> = ({
             key={idx}
             isTarget={val === targetIndex}
             stage={stage}
+            score={score}
             time={time}
             setTime={setTime}
             setScore={setScore}
@@ -53,8 +56,8 @@ const BoxContainer: React.FC<Props> = ({
         }
         @media (max-width: 700px) {
           .boxContainer {
-            width: 300px;
-            height: 300px;
+            width: 90vw;
+            height: 90vw;
           }
         }
       `}</style>

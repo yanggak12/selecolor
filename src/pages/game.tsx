@@ -54,6 +54,7 @@ const Game: NextPage = () => {
         <>
           <StageTime stage={stage} time={time} score={score} />
           <BoxContainer
+            score={score}
             time={time}
             setTime={setTime}
             stage={stage}
