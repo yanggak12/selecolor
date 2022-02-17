@@ -31,7 +31,7 @@ const Rank: NextPage = () => {
           <div className="rank_item" key={idx}>
             <h3>{idx + 1}</h3>
             <h3>{val.nickname}</h3>
-            <h3>{val.score}</h3>
+            <h3>{val.score.toLocaleString()}</h3>
           </div>
         ))}
       </section>
