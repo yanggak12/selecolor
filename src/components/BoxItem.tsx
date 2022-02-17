@@ -1,4 +1,6 @@
 import getColorPercent from "../container/getColorPercent";
+import getRGBA from "../container/getRGBA";
+import setColorByStage from "../container/setColorByStage";
 
 interface Props {
   isTarget: boolean;
@@ -22,6 +24,7 @@ const BoxItem: React.FC<Props> = ({
   setTime,
 }) => {
   const colorPercent = getColorPercent(stage);
+  setColorByStage(color, stage);
   return (
     <>
       <button
@@ -40,7 +43,7 @@ const BoxItem: React.FC<Props> = ({
           width: 100%;
           height: 100%;
           border-radius: 10%;
-          background-color: ${color + 1 + ")"};
+          background-color: ${getRGBA(color, 1)};
           border: 0;
           cursor: pointer;
         }
@@ -48,7 +51,10 @@ const BoxItem: React.FC<Props> = ({
           transform: translateY(-0.1em);
         }
         .target {
-          background-color: ${color + colorPercent + ")"};
+          background-color: ${getRGBA(
+            setColorByStage(color, stage),
+            colorPercent
+          )};
         }
       `}</style>
     </>
