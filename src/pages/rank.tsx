@@ -15,7 +15,6 @@ const Rank: NextPage = () => {
     })();
   }, []);
 
-  console.log(data);
   return (
     <div>
       <Seo title="Rank" />
@@ -50,7 +49,7 @@ const Rank: NextPage = () => {
             </h4>
             <h3>{val.nickname}</h3>
             <h3 className={idx < 3 ? "medal" : ""}>
-              {val.score.toLocaleString()}
+              {val.score && val.score.toLocaleString()}
             </h3>
           </div>
         ))}

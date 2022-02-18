@@ -37,8 +37,12 @@ const RankModal: React.FC<Props> = ({ isVisible, score, setVisible }) => {
               text="Rank"
               img="/medal.svg"
               onClickHandler={() => {
-                storeRank({ score, nickname });
-                router.replace("/rank");
+                if (nickname) {
+                  storeRank({ score, nickname });
+                  router.replace("/rank");
+                } else {
+                  alert("Please Input your nickname.");
+                }
               }}
             />
             <ImgButton
