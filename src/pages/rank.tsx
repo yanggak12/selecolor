@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
+import Seo from "../components/Seo";
 import getRank from "../container/getRank";
 import { StoreParams } from "../container/storeRank";
 
@@ -15,6 +16,7 @@ const Rank: NextPage = () => {
   console.log(data);
   return (
     <div>
+      <Seo title="Rank" />
       <header>
         <h2>Selecolor</h2>
         <h1>Hall of Fame</h1>

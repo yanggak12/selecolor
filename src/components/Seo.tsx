@@ -12,7 +12,7 @@ const Seo: React.FC<Props> = ({ title }) => {
         <meta property="og:title" content={"Selecolor | " + title} />
         <meta
           property="og:description"
-          content="Select a diffrent color box.\nVery simple game!"
+          content="Select a different color box. Very simple game!"
         />
         <meta
           property="og:image"
