@@ -31,7 +31,14 @@ const Rank: NextPage = () => {
         </div>
         <br />
         {data.map((val, idx) => (
-          <div className="rank_item" key={idx}>
+          <div
+            className={
+              (idx + 1) % 10 === 0 && idx + 1 !== 30
+                ? "rank_item sep"
+                : "rank_item"
+            }
+            key={idx}
+          >
             <h4>
               {idx < 3 ? (
                 <svg
@@ -64,7 +71,10 @@ const Rank: NextPage = () => {
           margin-top: 5em;
           border-bottom: 3px solid #000;
         }
-
+        .sep {
+          margin-bottom: 20px;
+          border-bottom: 2px solid #c7c7c7;
+        }
         .rank_item > h3 {
           display: flex;
           width: 8em;
