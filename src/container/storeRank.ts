@@ -9,6 +9,7 @@ const storeRank = ({ score, nickname }: StoreParams) => {
   set(ref(db, "users/" + nickname), {
     nickname: nickname,
     score: score,
+    time: Date(),
   });
 };
 
