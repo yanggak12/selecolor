@@ -9,7 +9,7 @@ const getRank = async () => {
       if (snapshot.exists()) {
         const arr: StoreParams[] = Object.values(snapshot.val());
         arr.sort((a, b) => b.score - a.score);
-        return arr.slice(0, 30);
+        return arr.slice(0, 50);
       } else {
         console.log("No data");
       }
