@@ -33,7 +33,7 @@ const Rank: NextPage = () => {
         {data.map((val, idx) => (
           <div
             className={
-              (idx + 1) % 10 === 0 && idx + 1 !== 30
+              (idx + 1) % 10 === 0 && idx + 1 !== 100
                 ? "rank_item sep"
                 : "rank_item"
             }
