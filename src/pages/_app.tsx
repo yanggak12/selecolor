@@ -1,11 +1,7 @@
-import type { AppProps } from "next/app";
-import Layout from "../components/Layout";
-import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "../utils/firebaseConfig";
+import type {AppProps} from 'next/app';
+import Layout from '../components/Layout';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  initializeApp(firebaseConfig);
-
+function MyApp({Component, pageProps}: AppProps) {
   return (
     <Layout>
       <Component {...pageProps} />

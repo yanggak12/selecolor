@@ -1,20 +1,17 @@
-import { getDatabase, ref, get, child } from "firebase/database";
 import { StoreParams } from "./storeRank";
 
-const getRank = async () => {
-  const dbRef = ref(getDatabase());
-
-  return await get(child(dbRef, "users"))
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        const arr: StoreParams[] = Object.values(snapshot.val());
-        arr.sort((a, b) => b.score - a.score);
-        return arr.slice(0, 100);
-      } else {
-        console.log("No data");
-      }
-    })
-    .catch((e) => console.log(e));
+const getRank = async (): Promise<StoreParams[] | undefined> => {
+  try {
+    const response = await fetch("/api/rank");
+    if (!response.ok) {
+      throw new Error("Failed to fetch rankings");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error getting rank:", error);
+    return undefined;
+  }
 };
 
 export default getRank;
