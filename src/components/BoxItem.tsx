@@ -7,6 +7,7 @@ interface Props {
   score: number;
   setScore: (arg: number) => void;
   setTime: (arg: number) => void;
+  setIsWrongAnswer: (arg: boolean) => void;
 }
 
 const BoxItem: React.FC<Props> = ({
@@ -18,6 +19,7 @@ const BoxItem: React.FC<Props> = ({
   score,
   setScore,
   setTime,
+  setIsWrongAnswer,
 }) => {
   return (
     <>
@@ -27,6 +29,9 @@ const BoxItem: React.FC<Props> = ({
             setScore(score + Math.pow(stage, 3) * time);
             setStage(stage + 1);
           } else {
+            // 틀렸을 때 흔들림 애니메이션 트리거
+            setIsWrongAnswer(true);
+            setTimeout(() => setIsWrongAnswer(false), 800);
             time <= 3 ? setTime(0) : setTime(time - 3);
           }
         }}

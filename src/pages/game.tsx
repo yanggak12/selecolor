@@ -22,6 +22,7 @@ const Game: NextPage = () => {
   const [score, setScore] = useState(0);
   const [AlertVisible, setAlertVisible] = useState(false);
   const [RankVisible, setRankVisible] = useState(false);
+  const [isWrongAnswer, setIsWrongAnswer] = useState(false);
   const boxCnt = getBoxCnt(stage);
   const boxRange = getBoxRange(boxCnt);
   const gridCnt = getGridCnt(boxCnt);
@@ -54,7 +55,7 @@ const Game: NextPage = () => {
         </div>
       ) : (
         <>
-          <StageTime stage={stage} time={time} score={score} />
+          <StageTime stage={stage} time={time} score={score} isShaking={isWrongAnswer} />
           <BoxContainer
             score={score}
             time={time}
@@ -66,6 +67,7 @@ const Game: NextPage = () => {
             targetIndex={targetIndex}
             color={boxColor}
             setScore={setScore}
+            setIsWrongAnswer={setIsWrongAnswer}
           />
           <AlertModal
             rankHandler={() => setRankVisible(true)}

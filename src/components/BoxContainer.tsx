@@ -12,6 +12,7 @@ interface Props {
   score: number;
   setScore: (arg: number) => void;
   setTime: (arg: number) => void;
+  setIsWrongAnswer: (arg: boolean) => void;
 }
 const BoxContainer: React.FC<Props> = ({
   stage,
@@ -24,6 +25,7 @@ const BoxContainer: React.FC<Props> = ({
   score,
   setScore,
   setTime,
+  setIsWrongAnswer,
 }) => {
   return (
     <>
@@ -44,6 +46,7 @@ const BoxContainer: React.FC<Props> = ({
               setScore={setScore}
               setStage={setStage}
               boxColor={boxColor}
+              setIsWrongAnswer={setIsWrongAnswer}
             />
           );
         })}
