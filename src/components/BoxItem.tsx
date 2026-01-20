@@ -1,10 +1,8 @@
-import setColorByStage from "../container/setColorByStage";
-
 interface Props {
   isTarget: boolean;
   stage: number;
   setStage: (arg: number) => void;
-  color: string;
+  boxColor: string;
   time: number;
   score: number;
   setScore: (arg: number) => void;
@@ -15,7 +13,7 @@ const BoxItem: React.FC<Props> = ({
   isTarget,
   stage,
   setStage,
-  color,
+  boxColor,
   time,
   score,
   setScore,
@@ -24,7 +22,6 @@ const BoxItem: React.FC<Props> = ({
   return (
     <>
       <button
-        className={isTarget ? "target" : ""}
         onClick={() => {
           if (isTarget) {
             setScore(score + Math.pow(stage, 3) * time);
@@ -39,15 +36,12 @@ const BoxItem: React.FC<Props> = ({
           width: 100%;
           height: 100%;
           border-radius: 10%;
-          background-color: rgb(${color});
+          background-color: rgb(${boxColor});
           border: 0;
           cursor: pointer;
         }
         button:hover {
           transform: translateY(-0.1em);
-        }
-        .target {
-          background-color: rgb(${setColorByStage(color, stage)});
         }
       `}</style>
     </>

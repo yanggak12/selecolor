@@ -1,5 +1,5 @@
-import { boxColors } from "../utils/boxColors";
 import BoxItem from "./BoxItem";
+import setColorByStage from "../container/setColorByStage";
 
 interface Props {
   stage: number;
@@ -28,19 +28,25 @@ const BoxContainer: React.FC<Props> = ({
   return (
     <>
       <div className="boxContainer">
-        {boxRange.map((val, idx) => (
-          <BoxItem
-            key={idx}
-            isTarget={val === targetIndex}
-            stage={stage}
-            score={score}
-            time={time}
-            setTime={setTime}
-            setScore={setScore}
-            setStage={setStage}
-            color={color}
-          />
-        ))}
+        {boxRange.map((val, idx) => {
+          // 각 박스의 실제 색상을 여기서 결정 (CSS 클래스로 구분 불가능하게)
+          const isTarget = val === targetIndex;
+          const boxColor = isTarget ? setColorByStage(color, stage) : color;
+
+          return (
+            <BoxItem
+              key={idx}
+              isTarget={isTarget}
+              stage={stage}
+              score={score}
+              time={time}
+              setTime={setTime}
+              setScore={setScore}
+              setStage={setStage}
+              boxColor={boxColor}
+            />
+          );
+        })}
       </div>
       <style jsx>{`
         .boxContainer {
