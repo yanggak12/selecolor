@@ -67,7 +67,7 @@ export default async function handler(
       });
     }
   } else if (req.method === "POST") {
-    // 랭킹 등록/업데이트
+    // 랭킹 등록/업데이트 (최고 점수만 기록)
     try {
       const { nickname, score } = req.body;
 
@@ -75,7 +75,7 @@ export default async function handler(
         return res.status(400).json({ error: "Invalid request body" });
       }
 
-      // 1. 먼저 동일한 닉네임이 있는지 검색
+      // 1. 동일한 닉네임이 있는지 검색
       const searchResponse = await notion.databases.query({
         database_id: DATABASE_ID,
         filter: {
@@ -86,17 +86,35 @@ export default async function handler(
         },
       });
 
-      // 2. 기존 레코드가 있으면 업데이트
+      // 2. 기존 레코드가 있는 경우
       if (searchResponse.results.length > 0) {
-        const pageId = searchResponse.results[0].id;
-        await notion.pages.update({
-          page_id: pageId,
-          properties: {
-            Score: {
-              number: score,
+        const existingPage: any = searchResponse.results[0];
+        const existingScore = existingPage.properties.Score?.number || 0;
+
+        // 새 점수가 더 높은 경우에만 업데이트
+        if (score > existingScore) {
+          await notion.pages.update({
+            page_id: existingPage.id,
+            properties: {
+              Score: {
+                number: score,
+              },
             },
-          },
-        });
+          });
+          return res.status(200).json({
+            success: true,
+            updated: true,
+            message: "New high score!"
+          });
+        } else {
+          // 기존 점수가 더 높거나 같으면 업데이트하지 않음
+          return res.status(200).json({
+            success: true,
+            updated: false,
+            message: "Previous score was higher",
+            existingScore
+          });
+        }
       } else {
         // 3. 없으면 새로 생성
         await notion.pages.create({
@@ -109,18 +127,21 @@ export default async function handler(
                 {
                   text: {
                     content: nickname,
-                  },
                 },
-              ],
-            },
-            Score: {
-              number: score,
-            },
+              },
+            ],
           },
-        });
+          Score: {
+            number: score,
+          },
+        },
+      });
+      return res.status(200).json({
+        success: true,
+        updated: true,
+        message: "New record created!"
+      });
       }
-
-      res.status(200).json({ success: true });
     } catch (error) {
       console.error("Error storing rank:", error);
       res.status(500).json({ error: "Failed to store ranking" });

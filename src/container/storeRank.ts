@@ -3,7 +3,14 @@ export interface StoreParams {
   nickname: string;
 }
 
-const storeRank = async ({ score, nickname }: StoreParams) => {
+export interface StoreRankResponse {
+  success: boolean;
+  updated: boolean;
+  message?: string;
+  existingScore?: number;
+}
+
+const storeRank = async ({ score, nickname }: StoreParams): Promise<StoreRankResponse> => {
   try {
     const response = await fetch("/api/rank", {
       method: "POST",

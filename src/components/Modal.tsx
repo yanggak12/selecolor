@@ -1,9 +1,10 @@
 interface Props {
   isVisible: boolean;
   children: React.ReactNode;
+  zIndex?: number;
 }
 
-const Modal: React.FC<Props> = ({ isVisible, children }) => {
+const Modal: React.FC<Props> = ({ isVisible, children, zIndex = 1000 }) => {
   return (
     <div className={isVisible ? "open modal" : "modal"}>
       {children}
@@ -16,6 +17,7 @@ const Modal: React.FC<Props> = ({ isVisible, children }) => {
           bottom: 0;
           left: 0;
           background-color: rgba(0, 0, 0, 0.5);
+          z-index: ${zIndex};
         }
         .open {
           display: flex;
