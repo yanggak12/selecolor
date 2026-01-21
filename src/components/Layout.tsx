@@ -1,10 +1,7 @@
-import PageLink from "./PageLink";
-
 const Layout: React.FC = ({ children }) => {
   return (
     <>
       <div className="container">
-        <PageLink />
         <div>{children}</div>
       </div>
       <style jsx global>{`
