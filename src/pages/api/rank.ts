@@ -120,6 +120,35 @@ export default async function handler(
     return res.status(200).end();
   }
 
+  // Referer 기반 검증 (허용된 origin에서의 요청만 허용)
+  const referer = req.headers.referer || req.headers.origin;
+
+  if (!referer) {
+    return res.status(403).json({
+      error: "Forbidden: Invalid request source"
+    });
+  }
+
+  // Referer가 허용된 origin 목록에 있는지 확인
+  try {
+    const refererUrl = new URL(referer);
+    const refererOrigin = `${refererUrl.protocol}//${refererUrl.host}`;
+
+    const isAllowed = allowedOrigins.some(allowedOrigin => {
+      return refererOrigin === allowedOrigin.trim();
+    });
+
+    if (!isAllowed) {
+      return res.status(403).json({
+        error: "Forbidden: External requests not allowed"
+      });
+    }
+  } catch (error) {
+    return res.status(403).json({
+      error: "Forbidden: Invalid referer"
+    });
+  }
+
   // Rate limiting 체크
   const clientIp = getClientIp(req);
   if (!checkRateLimit(clientIp)) {
