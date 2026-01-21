@@ -16,7 +16,6 @@ const MAX_REQUESTS_PER_WINDOW = 10;
 // 입력값 검증 상수
 const MAX_NICKNAME_LENGTH = 20;
 const MIN_NICKNAME_LENGTH = 2;
-const MAX_SCORE = 1000000;
 const MIN_SCORE = 0;
 
 // IP 주소 추출 헬퍼 함수
@@ -89,8 +88,8 @@ function validateScore(score: any): { valid: boolean; error?: string } {
     return { valid: false, error: "Score must be a valid number" };
   }
 
-  if (score < MIN_SCORE || score > MAX_SCORE) {
-    return { valid: false, error: `Score must be between ${MIN_SCORE} and ${MAX_SCORE}` };
+  if (score < MIN_SCORE) {
+    return { valid: false, error: `Score must be at least ${MIN_SCORE}` };
   }
 
   if (!Number.isInteger(score)) {
