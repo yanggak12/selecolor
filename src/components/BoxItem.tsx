@@ -8,6 +8,8 @@ interface Props {
   setScore: (arg: number) => void;
   setTime: (arg: number) => void;
   setIsWrongAnswer: (arg: boolean) => void;
+  hasMouseMoved: boolean;
+  stageStartTime: number;
 }
 
 const BoxItem: React.FC<Props> = ({
@@ -20,11 +22,26 @@ const BoxItem: React.FC<Props> = ({
   setScore,
   setTime,
   setIsWrongAnswer,
+  hasMouseMoved,
+  stageStartTime,
 }) => {
   return (
     <>
       <button
         onClick={() => {
+          // AI 치팅 방지: 마우스 움직임 확인
+          if (!hasMouseMoved) {
+            console.warn('No mouse movement detected - possible bot');
+            return;
+          }
+
+          // AI 치팅 방지: 최소 반응 시간 확인 (300ms)
+          const timeSinceStageStart = Date.now() - stageStartTime;
+          if (timeSinceStageStart < 300) {
+            console.warn('Too fast click - possible bot');
+            return;
+          }
+
           if (isTarget) {
             setScore(score + Math.pow(stage, 3) * time);
             setStage(stage + 1);

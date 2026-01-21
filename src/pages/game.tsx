@@ -23,6 +23,8 @@ const Game: NextPage = () => {
   const [AlertVisible, setAlertVisible] = useState(false);
   const [RankVisible, setRankVisible] = useState(false);
   const [isWrongAnswer, setIsWrongAnswer] = useState(false);
+  const [hasMouseMoved, setHasMouseMoved] = useState(false);
+  const [stageStartTime, setStageStartTime] = useState(Date.now());
   const boxCnt = getBoxCnt(stage);
   const boxRange = getBoxRange(boxCnt);
   const gridCnt = getGridCnt(boxCnt);
@@ -34,7 +36,26 @@ const Game: NextPage = () => {
     setBoxColor(getRandomColor());
     setTime(15);
     setTargetIndex(getTargetIndex(boxCnt));
+    setStageStartTime(Date.now());
   }, [stage, boxCnt]);
+
+  useEffect(() => {
+    const handleMouseMove = () => {
+      setHasMouseMoved(true);
+    };
+
+    const handleTouchStart = () => {
+      setHasMouseMoved(true);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchstart', handleTouchStart);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchstart', handleTouchStart);
+    };
+  }, []);
   useInterval(() => {
     if (readyTime) setReadyTime(readyTime - 1);
     else if (time) setTime(time - 1);
@@ -68,6 +89,8 @@ const Game: NextPage = () => {
             color={boxColor}
             setScore={setScore}
             setIsWrongAnswer={setIsWrongAnswer}
+            hasMouseMoved={hasMouseMoved}
+            stageStartTime={stageStartTime}
           />
           <AlertModal
             rankHandler={() => setRankVisible(true)}

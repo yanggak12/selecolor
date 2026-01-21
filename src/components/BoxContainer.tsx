@@ -13,6 +13,8 @@ interface Props {
   setScore: (arg: number) => void;
   setTime: (arg: number) => void;
   setIsWrongAnswer: (arg: boolean) => void;
+  hasMouseMoved: boolean;
+  stageStartTime: number;
 }
 const BoxContainer: React.FC<Props> = ({
   stage,
@@ -26,6 +28,8 @@ const BoxContainer: React.FC<Props> = ({
   setScore,
   setTime,
   setIsWrongAnswer,
+  hasMouseMoved,
+  stageStartTime,
 }) => {
   return (
     <>
@@ -47,6 +51,8 @@ const BoxContainer: React.FC<Props> = ({
               setStage={setStage}
               boxColor={boxColor}
               setIsWrongAnswer={setIsWrongAnswer}
+              hasMouseMoved={hasMouseMoved}
+              stageStartTime={stageStartTime}
             />
           );
         })}
